@@ -30,8 +30,14 @@ class SvetaHero:
 
     def take_damage(self, damage):
         damage, fatigue = self._try_to_defeat(damage)
-        self.health -= damage
+
         self.stamina -= fatigue
+        new_health = self.health - damage
+
+        if new_health < 0:
+            self.health = 0
+        else:
+            self.health = new_health
 
     def _try_to_defeat(self, damage):
         fatigue = 0.1
