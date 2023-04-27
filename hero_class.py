@@ -38,11 +38,17 @@ class Hero():
 
     def take_damage(self, amount_of_enemy_dmg):
         if self.is_defense:
-            amount_of_enemy_dmg -= self.armor
+            amount_of_enemy_dmg = amount_of_enemy_dmg - self.armor
+            if amount_of_enemy_dmg < 0:
+                amount_of_enemy_dmg = 0
             agility = 50
         else:
             agility = 10
-        self.hp -= amount_of_enemy_dmg
+        temporary_hp = self.hp - amount_of_enemy_dmg
+        if temporary_hp < 0:
+            self.hp = 0
+        else:
+            self.hp = temporary_hp
         self.ag -= agility
 
     def defense(self):
